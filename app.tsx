@@ -34,7 +34,7 @@ const rootRoute = createRootRoute({
       <div className="text-center space-y-3">
         <h1 className="text-4xl font-bold text-muted-foreground">404</h1>
         <p className="text-muted-foreground">Page not found.</p>
-        <a href="/dashboard" className="text-primary underline text-sm">Go to Dashboard</a>
+        <a href="/" className="text-primary underline text-sm">Go to Dashboard</a>
       </div>
     </div>
   ),
@@ -45,13 +45,6 @@ const rootRoute = createRootRoute({
       </div>
     </div>
   ),
-});
-
-/* ── Redirect / → /dashboard ─────────────────── */
-const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
-  beforeLoad: () => { throw redirect({ to: '/dashboard' }); },
 });
 
 /* ── Layout wrapper (pathless) ───────────────── */
@@ -65,7 +58,7 @@ const appRoute = createRoute({
 const mk = <T extends string>(path: T, component: any) =>
   createRoute({ getParentRoute: () => appRoute, path, component });
 
-const dashboardRoute  = mk('dashboard',  Dashboard);
+const dashboardRoute  = mk('/',  Dashboard);
 const billingRoute    = mk('billing',    BillingPage);
 const inventoryRoute  = mk('inventory',  InventoryPage);
 const purchasesRoute  = mk('purchases',  PurchasesPage);
@@ -80,7 +73,6 @@ const settingsRoute   = mk('settings',   SettingsPage);
 
 /* ── Route tree ──────────────────────────────── */
 const routeTree = rootRoute.addChildren([
-  indexRoute,
   appRoute.addChildren([
     dashboardRoute, billingRoute, inventoryRoute, purchasesRoute,
     customersRoute, suppliersRoute, employeesRoute, expensesRoute,

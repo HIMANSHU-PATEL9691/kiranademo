@@ -12,7 +12,7 @@ const NAV_GROUPS = [
   {
     label: 'Operations',
     items: [
-      { title: 'Dashboard',   url: '/dashboard', icon: LayoutDashboard },
+      { title: 'Dashboard',   url: '/', icon: LayoutDashboard },
       { title: 'Billing / POS', url: '/billing', icon: ShoppingCart },
       { title: 'Inventory',   url: '/inventory', icon: Package },
       { title: 'Purchases',   url: '/purchases', icon: PackagePlus },
@@ -107,7 +107,7 @@ function SidebarContent({
   onLinkClick?: () => void;
 }) {
   const isActive = (url: string) =>
-    pathname === url || pathname.startsWith(url + '/');
+    pathname === url || (url !== '/' && pathname.startsWith(url + '/'));
 
   return (
     <div className="flex flex-col h-full bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
